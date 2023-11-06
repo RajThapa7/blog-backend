@@ -14,15 +14,14 @@ const errorHandler = (error) => {
   let errorObj = {};
 
   if (error.message === "Incorrect email") {
-    errorObj.email = "The email is not registered";
+    errorObj = "The email is not registered";
   }
   if (error.message === "Incorrect password") {
-    errorObj.password = "Incorrect password";
+    errorObj = "Incorrect password";
   }
 
   if (error.name === "CastError") {
-    errorObj.error =
-      "Record doesn't exists for the given id or the id is invalid";
+    errorObj = "Record doesn't exists for the given id or the id is invalid";
   }
 
   if (error.name === "ValidationError") {
