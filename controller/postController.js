@@ -19,30 +19,44 @@ const getAllPost = catchAsync(async (req, res) => {
   res.json({ posts });
 });
 
+const getPost = catchAsync(async (req, res) => {
+  const { postId } = req.params;
+  const post = await Post.findById(postId);
+  res.json(post);
+});
+
 const addComment = catchAsync(async (req, res) => {
-  const { content, creator, post, replies } = req.body;
+  const { content, creator, post, replies, isReply, replyingTo } = req.body;
   const comment = await Comment.create({
     content,
     creator,
     post,
     replies,
+    isReply,
   });
+  //if the comment is a reply then we will push the id of the created comment
+  // to the replies array of the comment, the new comment is replying to
+  if (isReply) {
+    await Comment.findByIdAndUpdate(replyingTo, {
+      $push: { replies: comment },
+    });
+  }
   res.json(comment);
-});
-
-const replyToComment = catchAsync(async (req, res) => {
-  const { content, creator, post, replyingTo } = req.body;
-  const reply = await Comment.create({ content, creator, post });
-  await Comment.findByIdAndUpdate(replyingTo, {
-    $push: { replies: reply },
-  });
-  res.json(reply);
 });
 
 const getCommentsOnPost = catchAsync(async (req, res) => {
   const { postId } = req.params;
-  const comments = await Comment.find({ post: postId }).populate("replies");
+  const comments = await Comment.find({
+    post: postId,
+    isReply: false,
+  });
   res.json(comments);
+});
+
+const getRepliesOfComment = catchAsync(async (req, res) => {
+  const { commentId } = req.params;
+  const comment = await Comment.findById(commentId).populate("replies");
+  res.json(comment.replies);
 });
 
 const getComment = catchAsync(async (req, res) => {
@@ -53,9 +67,10 @@ const getComment = catchAsync(async (req, res) => {
 
 module.exports = {
   createPost,
-  replyToComment,
   getAllPost,
+  getPost,
   addComment,
   getCommentsOnPost,
+  getRepliesOfComment,
   getComment,
 };

@@ -23,6 +23,10 @@ const commentSchema = new mongoose.Schema(
         ref: "Comment",
       },
     ],
+    isReply: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

@@ -15,6 +15,9 @@ const {
   invalidPathHandler,
   errorLoggerMiddleware,
 } = require("./middlewares/errorHandlerMiddleware");
+const corsMiddleware = require("./middlewares/corsMiddleware");
+
+app.use(corsMiddleware());
 
 app.use(adminRoutes);
 app.use(userRoutes);
