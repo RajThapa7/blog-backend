@@ -1,18 +1,29 @@
 const Comment = require("../models/commentModel");
 const Post = require("../models/postModel");
 const catchAsync = require("../utils/catchAsync");
+const {
+  upload,
+  imageUpload,
+  deleteImageFromCloud,
+} = require("../utils/cloudinary");
 
-const createPost = catchAsync(async (req, res) => {
-  const { title, body, author, featuredImage, isPublished } = req.body;
-  const post = await Post.create({
-    title,
-    body,
-    author,
-    featuredImage,
-    ...(isPublished && { isPublished }),
-  });
-  res.json({ post });
-});
+const createPost = async (req, res, next) => {
+  const { title, body, author, isPublished } = req.body;
+  const cloudFile = await imageUpload(req, res);
+  try {
+    const post = await Post.create({
+      title,
+      body,
+      author,
+      featuredImage: cloudFile,
+      ...(isPublished && { isPublished }),
+    });
+    res.json(post);
+  } catch (error) {
+    await deleteImageFromCloud(cloudFile);
+    next(error);
+  }
+};
 
 const getAllPost = catchAsync(async (req, res) => {
   const posts = await Post.find({}).populate("author", "name email");

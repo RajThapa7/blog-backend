@@ -32,11 +32,19 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    slug: {
+      type: String,
+    },
   },
   {
     timestamps: true,
   }
 );
+
+postSchema.pre("save", async function (next) {
+  this.slug = this.title.split(" ").join("-");
+  next();
+});
 
 const Post = mongoose.model("Post", postSchema);
 
