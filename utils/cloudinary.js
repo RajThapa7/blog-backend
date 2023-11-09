@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary").v2;
+import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
   secure: true,
@@ -48,4 +48,4 @@ const deleteImageFromCloud = async (imageUrl) => {
   await cloudinary.uploader.destroy(publicId);
 };
 
-module.exports = { upload, imageUpload, deleteImageFromCloud };
+export { deleteImageFromCloud, getPublicIdFromURL, imageUpload };

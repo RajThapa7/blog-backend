@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const authorRequestSchema = new mongoose.Schema({
   questions: {
@@ -14,4 +14,4 @@ const authorRequestSchema = new mongoose.Schema({
 
 const AuthorRequest = mongoose.model("AuthorRequest", authorRequestSchema);
 
-module.exports = AuthorRequest;
+export default AuthorRequest;

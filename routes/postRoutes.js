@@ -1,14 +1,14 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
+  addComment,
   createPost,
   getAllPost,
-  addComment,
-  getCommentsOnPost,
-  replyToComment,
   getComment,
-  getRepliesOfComment,
+  getCommentsOnPost,
   getPost,
-} = require("../controller/postController");
+  getRepliesOfComment,
+} from "../controller/postController.js";
+
 const router = Router();
 
 router
@@ -20,4 +20,4 @@ router
   .get("/comment/:commentId", getComment)
   .get("/comment/replies/:commentId", getRepliesOfComment);
 
-module.exports = router;
+export default router;

@@ -1,6 +1,5 @@
-const AuthorRequest = require("../models/authorRequestModel");
-const User = require("../models/userModel");
-const catchAsync = require("../utils/catchAsync");
+import { AuthorRequest, User } from "../models/index.js";
+import catchAsync from "../utils/catchAsync.js";
 
 const createUser = catchAsync(async (req, res) => {
   const { name, email } = req.body;
@@ -25,4 +24,4 @@ const requestToBeAuthor = catchAsync(async (req, res) => {
   res.json({ request });
 });
 
-module.exports = { createUser, getUser, requestToBeAuthor };
+export { createUser, getUser, requestToBeAuthor };

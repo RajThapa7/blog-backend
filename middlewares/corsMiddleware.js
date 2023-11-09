@@ -1,5 +1,5 @@
-const cors = require("cors");
-const AppError = require("../utils/appError");
+import cors from "cors";
+import AppError from "../utils/appError.js";
 
 const origin1 = process.env.CLIENT_URL1;
 
@@ -15,4 +15,4 @@ const corsMiddleware = () => {
   return cors(corsOptions);
 };
 
-module.exports = corsMiddleware;
+export default corsMiddleware;

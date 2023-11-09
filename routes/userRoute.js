@@ -1,9 +1,10 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
   createUser,
   getUser,
   requestToBeAuthor,
-} = require("../controller/userController");
+} from "../controller/userController.js";
+
 const router = Router();
 
 router
@@ -11,4 +12,4 @@ router
   .post("/user/become-author", requestToBeAuthor)
   .get("/user/:userId", getUser);
 
-module.exports = router;
+export default router;

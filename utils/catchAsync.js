@@ -5,4 +5,4 @@ const catchAsync = (handler) => {
   };
 };
 
-module.exports = catchAsync;
+export default catchAsync;

@@ -1,7 +1,5 @@
-const AuthorRequest = require("../models/authorRequestModel");
-const Role = require("../models/roleModel");
-const User = require("../models/userModel");
-const catchAsync = require("../utils/catchAsync");
+import { AuthorRequest, Role, User } from "../models/index.js";
+import catchAsync from "../utils/catchAsync.js";
 
 const createRole = catchAsync(async (req, res) => {
   const { role, roleId } = req.body;
@@ -48,10 +46,10 @@ const verifyAuthorRequest = catchAsync(async (req, res) => {
   res.json(verifiedAuthorUser);
 });
 
-module.exports = {
+export {
   createRole,
-  editUserRole,
   deleteUser,
+  editUserRole,
   getAllUsers,
   getAuthorRequestList,
   verifyAuthorRequest,

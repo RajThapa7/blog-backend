@@ -1,4 +1,4 @@
-const errorHandler = require("../utils/errorHandler");
+import errorHandler from "../utils/errorHandler.js";
 
 //handling error in production
 const sendProdError = (err, res) => {
@@ -52,8 +52,4 @@ const invalidPathHandler = (req, res, next) => {
     .json({ err: `Method ${req.method} is not available on path ${req.path}` });
 };
 
-module.exports = {
-  errorLoggerMiddleware,
-  errorHandlerMiddleware,
-  invalidPathHandler,
-};
+export { errorHandlerMiddleware, errorLoggerMiddleware, invalidPathHandler };

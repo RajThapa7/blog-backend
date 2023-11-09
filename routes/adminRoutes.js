@@ -1,12 +1,12 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
   createRole,
-  editUserRole,
   deleteUser,
+  editUserRole,
   getAllUsers,
   getAuthorRequestList,
   verifyAuthorRequest,
-} = require("../controller/adminController");
+} from "../controller/adminController.js";
 
 const router = Router();
 
@@ -18,4 +18,4 @@ router
   .get("/author-request", getAuthorRequestList)
   .post("/verify-author-request", verifyAuthorRequest);
 
-module.exports = router;
+export default router;

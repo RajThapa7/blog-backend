@@ -1,4 +1,4 @@
-const AppError = require("./appError");
+import AppError from "./appError.js";
 
 const handleDBDuplicateFields = (err) => {
   const value = err.message.match(/(["'])(?:(?=(\\?))\2.)*?\1/)[0];
@@ -41,4 +41,4 @@ const errorHandler = (error) => {
   return errorObj;
 };
 
-module.exports = errorHandler;
+export default errorHandler;

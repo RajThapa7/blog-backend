@@ -1,11 +1,6 @@
-const Comment = require("../models/commentModel");
-const Post = require("../models/postModel");
-const catchAsync = require("../utils/catchAsync");
-const {
-  upload,
-  imageUpload,
-  deleteImageFromCloud,
-} = require("../utils/cloudinary");
+import { Comment, Post } from "../models/index.js";
+import catchAsync from "../utils/catchAsync.js";
+import { deleteImageFromCloud, imageUpload } from "../utils/cloudinary.js";
 
 const createPost = async (req, res, next) => {
   const { title, body, author, isPublished } = req.body;
@@ -76,12 +71,12 @@ const getComment = catchAsync(async (req, res) => {
   res.json(comment);
 });
 
-module.exports = {
+export {
+  addComment,
   createPost,
   getAllPost,
-  getPost,
-  addComment,
-  getCommentsOnPost,
-  getRepliesOfComment,
   getComment,
+  getCommentsOnPost,
+  getPost,
+  getRepliesOfComment,
 };
